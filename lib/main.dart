@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main(){
@@ -33,10 +32,10 @@ class HomePage  extends StatelessWidget{
            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
            children: [
               ElevatedButton(onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder:(context)=>Page1Activity()));
+                Navigator.push(context, MaterialPageRoute(builder:(context)=>Page1Activity("This is from home to activity 1")));
               }, child:Text("Go Activity 1"),),
              ElevatedButton(onPressed: (){
-               Navigator.push(context, MaterialPageRoute(builder: (context)=>Page2Activity()));
+               Navigator.push(context, MaterialPageRoute(builder: (context)=>Page2Activity("This is from home to activity 2")));
              }, child:Text("Go Activity 2"),),
            ]
          ),
@@ -44,35 +43,45 @@ class HomePage  extends StatelessWidget{
   }
 }
 
-class Page1Activity extends StatelessWidget{
-  const Page1Activity({super.key});
+class Page1Activity extends StatelessWidget {
+  String msg;
+
+  Page1Activity(this.msg,
+      {super.key});
+
 
   @override
   Widget build(BuildContext context) {
-       return Scaffold(
-         appBar: AppBar(
-           title: const Center(child: Text("Activity 1"),),
-           backgroundColor: Colors.lightGreen,
-         ),
-         body: Center(
-      child: ElevatedButton(onPressed: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>Page2Activity()));
-      }, child: Text("Go Activity 2"))
-       )
-       );
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(msg),
+          backgroundColor: Colors.lightGreen,
+        ),
+        body: Center(
+            child: ElevatedButton(onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Page2Activity("This is from activity 1 to activity 2")));
+            }, child: const Text("Go Activity 2"))
+        )
+    );
   }
 
 }
 
 class Page2Activity extends StatelessWidget{
-  const Page2Activity({super.key});
+
+   String msg;
+   Page2Activity(
+       this.msg,
+      {super.key}
+      );
 
   @override
   Widget build(BuildContext context) {
      return  Scaffold(
        appBar:AppBar(
-         title:Text("Actvity 2") ,
-       backgroundColor: Colors.grey,),
+         title:Text(msg) ,
+       backgroundColor: Colors.lightGreen,),
        body: Center(
          child: CircleAvatar(
            radius: 200,
